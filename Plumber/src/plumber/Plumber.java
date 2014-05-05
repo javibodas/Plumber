@@ -28,9 +28,11 @@ public class Plumber extends Application {
     @Override
     public void start(Stage primaryStage) {
         /* Inicizalizar elementos del panel central del fondo*/
-        Tuberias[] tuberias = new Tuberias[32];
-        for(int i=0;i<32;i++){
-            tuberias[i] = new Tuberias();
+        Tuberias[][] tuberias = new Tuberias[4][8];
+        for(int i=0;i<4;i++){
+            for(int j=0;j<8;j++){
+                tuberias[i][j] = new Tuberias();
+            }
         }
         Grifo grifo = new Grifo();
         Tuberias tuberiaFinal = new Tuberias();

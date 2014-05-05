@@ -19,9 +19,8 @@ import javafx.scene.image.ImageView;
 public class Tuberias extends Button {
     
     
-    private int gradosImagen = 0; /*0: posicion inicial; 90: un click; 180: dos click;
-                                    270: tres clicks; 360=0:cuatro clicks*/
-    private Image[] imagenes = new Image[7];
+    private int grado = 0;
+    private Image[] imagenes = new Image[13];
     public Tuberias(){
         
         //Inicializar imagenes
@@ -31,41 +30,81 @@ public class Tuberias extends Button {
         imagenes[3] = new Image("Tuberia360.png");
         imagenes[4] = new Image("TuberiaVertical.png");
         imagenes[5] = new Image("TuberiaHorizontal.png");
-        imagenes[6] = new Image("TuberiaFinal.png");
+        imagenes[6] = new Image("Tuberia90Llena.png");
+        imagenes[7] = new Image("Tuberia180Llena.png");
+        imagenes[8] = new Image("Tuberia270Llena.png");
+        imagenes[9] = new Image("Tuberia360Llena.png");
+        imagenes[10] = new Image("TuberiaVerticalLlena.png");
+        imagenes[11] = new Image("TuberiaHorizontalLlena.png");
+        imagenes[12] = new Image("TuberiaFinal.png");
         
         setOnAction(new EventHandler<ActionEvent>(){
 
             @Override
             public void handle(ActionEvent t) {
                 
-                Button b = (Button) t.getSource();
+                Tuberias b = (Tuberias) t.getSource();
                 ImageView v = (ImageView) b.getGraphic();
                 
                 if(v.getImage().equals(imagenes[2])){
                     b.setGraphic(new ImageView(imagenes[3]));
+                    b.setGrado(360);
                 }else if(v.getImage().equals(imagenes[3])){
-                     b.setGraphic(new ImageView(imagenes[0]));
+                    b.setGraphic(new ImageView(imagenes[0]));
+                    b.setGrado(90);
                 }else if(v.getImage().equals(imagenes[0])){
                     b.setGraphic(new ImageView(imagenes[1]));
+                    b.setGrado(180);
                 }else if(v.getImage().equals(imagenes[1])){
                     b.setGraphic(new ImageView(imagenes[2]));
+                    b.setGrado(270);
                 }else if(v.getImage().equals(imagenes[4])){
                      b.setGraphic(new ImageView(imagenes[5]));
+                     b.setGrado(2);
                 }else if(v.getImage().equals(imagenes[5])){
                      b.setGraphic(new ImageView(imagenes[4]));
+                     b.setGrado(1);
                 }
             }
             
         });
     }
     
-    public void insertarImagenTuberia(){
+    
+    public Image[] getImagenes(){
+        return this.imagenes;
+    }
+    public void insertarImagenTuberia(){ 
+        this.setGraphic(new ImageView(imagenes[(int) (Math.random()*6)]));
         
-        this.setGraphic(new ImageView(imagenes[(int) (Math.random()*6)]));  
+        ImageView v = (ImageView) this.getGraphic();
+        if(v.getImage().equals(imagenes[0])){
+            this.grado = 90;
+        }else if(v.getImage().equals(imagenes[1])){
+            this.grado = 180;
+        }else if(v.getImage().equals(imagenes[2])){
+            this.grado = 270;
+        }else if(v.getImage().equals(imagenes[3])){
+            this.grado = 360;
+        }else if(v.getImage().equals(imagenes[4])){
+            this.grado = 1;
+        }else if(v.getImage().equals(imagenes[5])){
+            this.grado = 2;
+        }
+        
+        
+        
+        
     }
     
     public void insertarImagenFinal(){
-        
-        this.setGraphic(new ImageView(imagenes[6]));
+        this.setGraphic(new ImageView(imagenes[12]));
     }   
+
+    public void setGrado(int grado) {
+       this.grado = grado;
+    }
+    public int getGrado(){
+        return this.grado;
+    }
 }
