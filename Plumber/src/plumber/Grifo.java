@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,7 +31,21 @@ public class Grifo extends Button{
 
             @Override
             public void handle(ActionEvent t) {
-                panelTuberias.girarGrifo(); 
+               panelTuberias.girarGrifo();     
+       
+              /*if(error){
+                    int respuesta = JOptionPane.showConfirmDialog(null, "GAME OVER. Play again?");  
+                    if(respuesta == JOptionPane.CANCEL_OPTION){
+                        System.exit(0);
+                    }else if(respuesta == JOptionPane.NO_OPTION){
+                        System.exit(0);
+                    }else if(respuesta == JOptionPane.OK_OPTION){
+                
+                    }else{
+                        System.exit(0);
+                    }
+                }
+              */  
             }
            
         });

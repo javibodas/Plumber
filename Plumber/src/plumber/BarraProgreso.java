@@ -6,6 +6,7 @@
 
 package plumber;
 
+import static java.lang.Thread.sleep;
 import javafx.scene.control.ProgressBar;
 
 /**
@@ -14,8 +15,28 @@ import javafx.scene.control.ProgressBar;
  */
 public class BarraProgreso extends ProgressBar {
     
-    public BarraProgreso(){
-        setMinSize(440, 40);
+    
+    private double progreso;
+    private int count=0;
+    public BarraProgreso(double progreso){
+        this.progreso = progreso;
+    }
+    
+    public void iniciarReloj() throws InterruptedException{
+         
+         count++;
+         if(count==20){
+             return;
+         }
+         this.setProgress(this.progreso);
+         this.progreso = this.progreso + 0.05;
+         System.out.println(this.progreso);
+         sleep(1);
+         this.iniciarReloj();
+         
+         
+        
+        
     }
     
 }

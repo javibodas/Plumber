@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +27,7 @@ public class Plumber extends Application {
     
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws InterruptedException {
         /* Inicizalizar elementos del panel central del fondo*/
         Tuberias[][] tuberias = new Tuberias[4][8];
         for(int i=0;i<4;i++){
@@ -41,14 +42,24 @@ public class Plumber extends Application {
         /*Inicializar elementos del panel superior del fondo*/
         Label moves = new Label("MOVES:");
         Label level = new Label("LEVEL:");
-        BarraProgreso time = new BarraProgreso();
+        BarraProgreso time = new BarraProgreso(0.0);
+        time.setMinSize(440, 40);
         PanelSuperior panelSuperior = new PanelSuperior(moves,level,time);
         
         /* Crear fondo pasandole sus elementos como argumentos*/
         Fondo fondo = new Fondo(panelTuberias,panelSuperior);
         fondo.colocarElementos();
-        
-        
+        /*
+        int respuesta = JOptionPane.showConfirmDialog(null, "PLAY");
+        if(respuesta == JOptionPane.CANCEL_OPTION){
+            System.exit(0);
+        }else if(respuesta == JOptionPane.OK_OPTION){
+            ThreadProgreso t = new ThreadProgreso(time);
+            t.start();
+        }else{
+            System.exit(0);
+        }
+        */
         Scene scene = new Scene(fondo, 1000, 590);
         
         primaryStage.setResizable(false);
