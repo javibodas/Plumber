@@ -29,18 +29,13 @@ public class Grifo extends Button{
     private ImageView image;
     public Grifo(ImageView image){
         
+    
         this.image = image;
         this.setOnAction(new EventHandler<ActionEvent>(){
-
             @Override
-            public void handle(ActionEvent t) {
-                try {     
+            public void handle(ActionEvent t) {   
                     panelTuberias.girarGrifo();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Grifo.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
-           
         });
     }
     
@@ -52,6 +47,11 @@ public class Grifo extends Button{
         
         this.panelTuberias = panelTuberias;
         
+    }
+    
+    public void colocarGrifo(){
+        this.colocarImagenGrifo();
+        panelTuberias.add(this, 0, 0);
     }
     
     public void colocarImagenGrifo(){

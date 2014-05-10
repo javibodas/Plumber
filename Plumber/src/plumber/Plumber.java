@@ -36,6 +36,7 @@ public class Plumber extends Application {
         Nivel level = new Nivel("LEVEL: 1");
         BarraProgreso time = new BarraProgreso(0.0);
         time.setMinSize(400, 40);
+        time.run();
         PanelSuperior panelSuperior = new PanelSuperior(moves,level,time);
         
         
@@ -48,7 +49,7 @@ public class Plumber extends Application {
         }
         Grifo grifo = new Grifo(new ImageView(new Image("Grifo.png")));
         Tuberias tuberiaFinal = new Tuberias();
-        PanelTuberias panelTuberias = new PanelTuberias(tuberias,grifo,tuberiaFinal,level);
+        PanelTuberias panelTuberias = new PanelTuberias(tuberias,grifo,tuberiaFinal);
         
         
         /* Crear fondo pasandole sus elementos como argumentos*/

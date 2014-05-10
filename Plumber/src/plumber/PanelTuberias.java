@@ -7,6 +7,8 @@
 package plumber;
 
 import static java.lang.Thread.sleep;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -29,32 +31,33 @@ public class PanelTuberias extends GridPane{
     private int numeroNivel=1;
     private boolean error = false;
     private int valor = 666;
-   
+    final Lock lock = new ReentrantLock();
     private int gradoAnterior = 0;
     private int grado = 0;
     private int puntero = 0;
     private int punteroAnterior = 0;
-    public PanelTuberias(Tuberias[][] tuberias,Grifo grifo,Tuberias tuberiaFinal,Nivel level){
+    public PanelTuberias(Tuberias[][] tuberias,Grifo grifo,Tuberias tuberiaFinal){
         
         this.tuberias = tuberias;
         this.grifo = grifo;
-        this.tuberiaFinal = tuberiaFinal;
-        this.level = level;
-        this.numeroNivel = level.getNivel();
-        
+        this.tuberiaFinal = tuberiaFinal;        
     }
     
     public void colocarGrifo(){
         grifo.setPanelTuberia(this);
-        grifo.colocarImagenGrifo();
-        this.add(grifo, 0, 0);
+        grifo.colocarGrifo();
     }
     
     public void colocarTuberias(){
         
+        //tuberias[0][0].setPanelTuberias(this);
+        //tuberias[0][0].colocarTuberias();
+        
+        
         for(int i=0;i<tuberias.length;i++){
             for(int j=0;j<tuberias[i].length;j++){
                 tuberias[i][j].insertarImagenTuberia();
+                tuberias[i][j].setPosicion(j, i+1);
                 this.add(tuberias[i][j],j,i+1);
             }
         }
@@ -75,7 +78,7 @@ public class PanelTuberias extends GridPane{
         }
     }
     
-    public void girarGrifo() throws InterruptedException{
+    public void girarGrifo(){
         
         
         Tuberias tuberia;
@@ -96,6 +99,7 @@ public class PanelTuberias extends GridPane{
             }else{
               pos = (grado + 3)+6;
             }
+            System.out.println(pos);
             tuberia.setGraphic(new ImageView(imagenes[pos]));
         }
       
@@ -109,8 +113,9 @@ public class PanelTuberias extends GridPane{
         grado = 0;
         gradoAnterior = 0;
         error = false;
-        m.start();
         
+        //Inicializo el thread
+        m.start();
     }
     
     /**
@@ -119,7 +124,8 @@ public class PanelTuberias extends GridPane{
     private void comprobarGradoAnterior(){
    
         //Si la posicion anterior es la misma tuberia error, a no ser que sean horizontales o verticales
-        if(grado==gradoAnterior && (grado!=1 || grado!=2)){
+        if(grado!=1 && grado!=2 && grado==gradoAnterior){
+            System.out.println("No deberia ser");
             error = true;
             return;
         }
@@ -204,7 +210,7 @@ public class PanelTuberias extends GridPane{
                     punteroAnterior = puntero ;puntero = puntero - 1; break;
                 }
             case 360:
-                if(puntero<8 && punteroAnterior==puntero+1){
+                if(puntero<8 && punteroAnterior==puntero-1){
                     err = false; break;
                 }else if((puntero==8 || puntero==16 || puntero==24) && punteroAnterior==puntero-8){
                     err = false; break;
@@ -250,6 +256,11 @@ public class PanelTuberias extends GridPane{
         return this.numeroNivel;
     }
     
+    public void setValor(int valor){
+        this.valor = valor;
+        System.out.println(this.valor);
+    }
+
     public void reiniciar(){
         this.reiniciarTuberias();
     }   

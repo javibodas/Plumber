@@ -6,11 +6,15 @@
 
 package plumber;
 
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 
 /**
  *
@@ -21,10 +25,26 @@ public class Tuberias extends Button {
     
     private int grado = 0;
     private Image[] imagenes = new Image[13];
-    
+    private int[] posicion = new int[2];
+    private PanelTuberias panel;
     public Tuberias(){
+        this.panel = panel;
         
-       this.inicializarTuberias(); 
+       //Inicializar imagenes
+       imagenes[0] = new Image("Tuberia90.png");
+       imagenes[1] = new Image("Tuberia180.png");
+       imagenes[2] = new Image("Tuberia270.png");
+       imagenes[3] = new Image("Tuberia360.png");
+       imagenes[4] = new Image("TuberiaVertical.png");
+       imagenes[5] = new Image("TuberiaHorizontal.png");
+       imagenes[6] = new Image("Tuberia90Llena.png");
+       imagenes[7] = new Image("Tuberia180Llena.png");
+       imagenes[8] = new Image("Tuberia270Llena.png");
+       imagenes[9] = new Image("Tuberia360Llena.png");
+       imagenes[10] = new Image("TuberiaVerticalLlena.png");
+       imagenes[11] = new Image("TuberiaHorizontalLlena.png");
+       imagenes[12] = new Image("TuberiaFinal.png");
+        
        this.setOnAction(new EventHandler<ActionEvent>(){
 
             @Override
@@ -58,22 +78,7 @@ public class Tuberias extends Button {
         });
     }
     
-    private void inicializarTuberias(){
-         //Inicializar imagenes
-        imagenes[0] = new Image("Tuberia90.png");
-        imagenes[1] = new Image("Tuberia180.png");
-        imagenes[2] = new Image("Tuberia270.png");
-        imagenes[3] = new Image("Tuberia360.png");
-        imagenes[4] = new Image("TuberiaVertical.png");
-        imagenes[5] = new Image("TuberiaHorizontal.png");
-        imagenes[6] = new Image("Tuberia90Llena.png");
-        imagenes[7] = new Image("Tuberia180Llena.png");
-        imagenes[8] = new Image("Tuberia270Llena.png");
-        imagenes[9] = new Image("Tuberia360Llena.png");
-        imagenes[10] = new Image("TuberiaVerticalLlena.png");
-        imagenes[11] = new Image("TuberiaHorizontalLlena.png");
-        imagenes[12] = new Image("TuberiaFinal.png");
-    }
+   
     
     public Image[] getImagenes(){
         return this.imagenes;
@@ -111,5 +116,32 @@ public class Tuberias extends Button {
     }
     public int getGrado(){
         return this.grado;
+    }
+    
+    public void setPosicion(int x,int y){
+       this.posicion[0] = x;
+       this.posicion[1] = y;
+    }
+    
+    public int[] getPosicion(){
+        return this.posicion;
+    }
+    
+    public void setPanelTuberias(PanelTuberias panel){
+        this.panel = panel;
+    }
+    public void colocarTuberias() {
+        /**
+        for(int i=0;i<tuberias.length;i++){
+            for(int j=0;j<tuberias[i].length;j++){
+                tuberias[i][j].insertarImagenTuberia();
+                tuberias[i][j].setPosicion(j, i+1);
+                this.add(tuberias[i][j],j,i+1);
+            }
+        }
+ 
+        tuberiaFinal.insertarImagenFinal();
+        this.add(tuberiaFinal, tuberias[0].length-1, tuberias.length+1);
+        */
     }
 }

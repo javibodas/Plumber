@@ -32,8 +32,15 @@ public class ThreadMensajes extends Thread{
             valor = JOptionPane.showConfirmDialog(null, "Desea jugar de nuevo?");
         }else{
             JOptionPane.showMessageDialog(null, "Siguiente nivel");
-        
         }
         
+        if(valor==JOptionPane.OK_OPTION){
+            
+        }else if(valor==666){
+            
+        }else{
+            System.exit(1);
+        }
+        pane.setValor(valor);
     }
 }

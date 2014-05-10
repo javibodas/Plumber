@@ -7,13 +7,15 @@
 package plumber;
 
 import static java.lang.Thread.sleep;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
 
 /**
  *
  * @author javier
  */
-public class BarraProgreso extends ProgressBar {
+public class BarraProgreso extends ProgressBar implements Runnable {
     
     
     private double progreso;
@@ -22,17 +24,21 @@ public class BarraProgreso extends ProgressBar {
         this.progreso = progreso;
     }
     
-    public void iniciarReloj() throws InterruptedException{
-         
-         count++;
+    @Override
+    public void run() {
+        count++;
          if(count==20){
              return;
          }
          this.setProgress(this.progreso);
          this.progreso = this.progreso + 0.05;
          System.out.println(this.progreso);
-         sleep(1);
-         this.iniciarReloj();
+        try {
+            sleep(1);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(BarraProgreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         this.run();
     }
     
 }
