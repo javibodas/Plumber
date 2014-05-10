@@ -12,6 +12,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -28,6 +30,15 @@ public class Plumber extends Application {
     
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
+        
+        /*Inicializar elementos del panel superior del fondo*/
+        Label moves = new Label("MOVES: 0");
+        Nivel level = new Nivel("LEVEL: 1");
+        BarraProgreso time = new BarraProgreso(0.0);
+        time.setMinSize(400, 40);
+        PanelSuperior panelSuperior = new PanelSuperior(moves,level,time);
+        
+        
         /* Inicizalizar elementos del panel central del fondo*/
         Tuberias[][] tuberias = new Tuberias[4][8];
         for(int i=0;i<4;i++){
@@ -35,33 +46,18 @@ public class Plumber extends Application {
                 tuberias[i][j] = new Tuberias();
             }
         }
-        Grifo grifo = new Grifo();
+        Grifo grifo = new Grifo(new ImageView(new Image("Grifo.png")));
         Tuberias tuberiaFinal = new Tuberias();
-        PanelTuberias panelTuberias = new PanelTuberias(tuberias,grifo,tuberiaFinal);
+        PanelTuberias panelTuberias = new PanelTuberias(tuberias,grifo,tuberiaFinal,level);
         
-        /*Inicializar elementos del panel superior del fondo*/
-        Label moves = new Label("MOVES:");
-        Label level = new Label("LEVEL:");
-        BarraProgreso time = new BarraProgreso(0.0);
-        time.setMinSize(440, 40);
-        PanelSuperior panelSuperior = new PanelSuperior(moves,level,time);
         
         /* Crear fondo pasandole sus elementos como argumentos*/
         Fondo fondo = new Fondo(panelTuberias,panelSuperior);
         fondo.colocarElementos();
-        /*
-        int respuesta = JOptionPane.showConfirmDialog(null, "PLAY");
-        if(respuesta == JOptionPane.CANCEL_OPTION){
-            System.exit(0);
-        }else if(respuesta == JOptionPane.OK_OPTION){
-            ThreadProgreso t = new ThreadProgreso(time);
-            t.start();
-        }else{
-            System.exit(0);
-        }
-        */
-        Scene scene = new Scene(fondo, 1000, 590);
         
+        
+        
+        Scene scene = new Scene(fondo, 1000, 590);
         primaryStage.setResizable(false);
         primaryStage.setTitle("Plumber");
         primaryStage.setScene(scene);

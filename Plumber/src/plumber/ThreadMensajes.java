@@ -7,6 +7,7 @@
 package plumber;
 
 import java.awt.Component;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javax.swing.JOptionPane;
 
@@ -16,11 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class ThreadMensajes extends Thread{
     
-    GridPane pane;
-    private int valor;
+    PanelTuberias pane;
+    private int valor = 666;
     private Boolean error;
-    public ThreadMensajes(boolean error){
-        //this.pane = pane;
+    public ThreadMensajes(PanelTuberias panel, boolean error){
+        this.pane = panel;
         this.error = error;
     }
     
@@ -29,25 +30,10 @@ public class ThreadMensajes extends Thread{
         
         if(error){
             valor = JOptionPane.showConfirmDialog(null, "Desea jugar de nuevo?");
-         }else{
-            JOptionPane.showMessageDialog(null, "Siguiente nivel");
-         }
-              
-        
-        if(valor==JOptionPane.OK_OPTION){
-            if(error){
-                
-            }else{
-                
-            }
         }else{
-            if(error){
-                System.exit(1);
-            }
+            JOptionPane.showMessageDialog(null, "Siguiente nivel");
+        
         }
+        
     }
-    
-    
-
-    
 }

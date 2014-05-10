@@ -21,9 +21,45 @@ public class Tuberias extends Button {
     
     private int grado = 0;
     private Image[] imagenes = new Image[13];
+    
     public Tuberias(){
         
-        //Inicializar imagenes
+       this.inicializarTuberias(); 
+       this.setOnAction(new EventHandler<ActionEvent>(){
+
+            @Override
+            public void handle(ActionEvent t) {
+                
+                Tuberias b = (Tuberias) t.getSource();
+                ImageView v = (ImageView) b.getGraphic();
+                
+                //Gira la imagen 90 grados en el sentido de las agujas del reloj
+                if(b.getGrado()==270){
+                    b.setGraphic(new ImageView(imagenes[3]));
+                    b.setGrado(360);
+                }else if(b.getGrado()==360){
+                    b.setGraphic(new ImageView(imagenes[0]));
+                    b.setGrado(90);
+                }else if(b.getGrado()==90){
+                    b.setGraphic(new ImageView(imagenes[1]));
+                    b.setGrado(180);
+                }else if(b.getGrado()==180){
+                    b.setGraphic(new ImageView(imagenes[2]));
+                    b.setGrado(270);
+                }else if(b.getGrado()==1){
+                     b.setGraphic(new ImageView(imagenes[5]));
+                     b.setGrado(2);
+                }else if(b.getGrado()==2){
+                     b.setGraphic(new ImageView(imagenes[4]));
+                     b.setGrado(1);
+                }
+            }
+            
+        });
+    }
+    
+    private void inicializarTuberias(){
+         //Inicializar imagenes
         imagenes[0] = new Image("Tuberia90.png");
         imagenes[1] = new Image("Tuberia180.png");
         imagenes[2] = new Image("Tuberia270.png");
@@ -37,43 +73,16 @@ public class Tuberias extends Button {
         imagenes[10] = new Image("TuberiaVerticalLlena.png");
         imagenes[11] = new Image("TuberiaHorizontalLlena.png");
         imagenes[12] = new Image("TuberiaFinal.png");
-        
-        setOnAction(new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent t) {
-                
-                Tuberias b = (Tuberias) t.getSource();
-                ImageView v = (ImageView) b.getGraphic();
-                
-                if(v.getImage().equals(imagenes[2])){
-                    b.setGraphic(new ImageView(imagenes[3]));
-                    b.setGrado(360);
-                }else if(v.getImage().equals(imagenes[3])){
-                    b.setGraphic(new ImageView(imagenes[0]));
-                    b.setGrado(90);
-                }else if(v.getImage().equals(imagenes[0])){
-                    b.setGraphic(new ImageView(imagenes[1]));
-                    b.setGrado(180);
-                }else if(v.getImage().equals(imagenes[1])){
-                    b.setGraphic(new ImageView(imagenes[2]));
-                    b.setGrado(270);
-                }else if(v.getImage().equals(imagenes[4])){
-                     b.setGraphic(new ImageView(imagenes[5]));
-                     b.setGrado(2);
-                }else if(v.getImage().equals(imagenes[5])){
-                     b.setGraphic(new ImageView(imagenes[4]));
-                     b.setGrado(1);
-                }
-            }
-            
-        });
     }
-    
     
     public Image[] getImagenes(){
         return this.imagenes;
     }
+    
+    public void setImagenes(Image[] imagenes){
+        this.imagenes = imagenes;
+    }
+    
     public void insertarImagenTuberia(){ 
         this.setGraphic(new ImageView(imagenes[(int) (Math.random()*6)]));
         
@@ -90,11 +99,7 @@ public class Tuberias extends Button {
             this.grado = 1;
         }else if(v.getImage().equals(imagenes[5])){
             this.grado = 2;
-        }
-        
-        
-        
-        
+        } 
     }
     
     public void insertarImagenFinal(){

@@ -23,12 +23,8 @@ import javafx.scene.text.Text;
  */
 public class Fondo extends BorderPane{
     
-    private Label moves;
-    //private Label movesResult;
-    private Label level;
-    //private Label leveResult;
+    
     private PanelSuperior panelSuperior;
-    private BarraProgreso time;
     private PanelTuberias panelTuberias;
     
     public Fondo(PanelTuberias panelTuberias, PanelSuperior panelSuperior){
@@ -36,7 +32,6 @@ public class Fondo extends BorderPane{
         this.panelTuberias = panelTuberias;
         this.panelSuperior = panelSuperior;
     }
-    
     
     /**
      * 
@@ -51,6 +46,22 @@ public class Fondo extends BorderPane{
         panelSuperior.colocarElementos();
         this.setCenter(panelTuberias);
         this.setTop(panelSuperior);
+    }
+    
+    public void setPaneTuberias(PanelTuberias panel){
+        this.panelTuberias = panel;
+    }
+    
+    public PanelTuberias getPanelTuberias(){
+        return this.panelTuberias;
+    }
+    
+    public void setPanelSuperior(PanelSuperior panel){
+        this.panelSuperior = panel;
+    }
+    
+    public PanelSuperior getPanelSuperior(){
+        return this.panelSuperior;
     }
     
 }

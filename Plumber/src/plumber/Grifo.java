@@ -6,6 +6,8 @@
 
 package plumber;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,28 +26,19 @@ public class Grifo extends Button{
    
     
     private PanelTuberias panelTuberias;
-    public Grifo(){
+    private ImageView image;
+    public Grifo(ImageView image){
         
-        setGraphic(new ImageView(new Image("Grifo.png")));
-        setOnAction(new EventHandler<ActionEvent>(){
+        this.image = image;
+        this.setOnAction(new EventHandler<ActionEvent>(){
 
             @Override
             public void handle(ActionEvent t) {
-               panelTuberias.girarGrifo();     
-       
-              /*if(error){
-                    int respuesta = JOptionPane.showConfirmDialog(null, "GAME OVER. Play again?");  
-                    if(respuesta == JOptionPane.CANCEL_OPTION){
-                        System.exit(0);
-                    }else if(respuesta == JOptionPane.NO_OPTION){
-                        System.exit(0);
-                    }else if(respuesta == JOptionPane.OK_OPTION){
-                
-                    }else{
-                        System.exit(0);
-                    }
+                try {     
+                    panelTuberias.girarGrifo();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Grifo.class.getName()).log(Level.SEVERE, null, ex);
                 }
-              */  
             }
            
         });
@@ -58,6 +51,11 @@ public class Grifo extends Button{
     public void setPanelTuberia(PanelTuberias panelTuberias){
         
         this.panelTuberias = panelTuberias;
+        
+    }
+    
+    public void colocarImagenGrifo(){
+        this.setGraphic(image);
         
     }
     

@@ -33,10 +33,6 @@ public class BarraProgreso extends ProgressBar {
          System.out.println(this.progreso);
          sleep(1);
          this.iniciarReloj();
-         
-         
-        
-        
     }
     
 }
