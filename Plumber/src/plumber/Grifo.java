@@ -35,6 +35,8 @@ public class Grifo extends Button{
             @Override
             public void handle(ActionEvent t) {   
                     panelTuberias.girarGrifo();
+                    //panelTuberias.esperarRespuestaMensaje();
+               
             }
         });
     }

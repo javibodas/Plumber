@@ -7,6 +7,7 @@
 package plumber;
 
 import static java.lang.Thread.sleep;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import javafx.collections.ObservableList;
@@ -22,7 +23,7 @@ import javax.swing.JOptionPane;
  *
  * @author javier
  */
-public class PanelTuberias extends GridPane{
+public class PanelTuberias extends GridPane {
     
     private Tuberias[][] tuberias;
     private Grifo grifo;
@@ -30,8 +31,9 @@ public class PanelTuberias extends GridPane{
     private Nivel level;
     private int numeroNivel=1;
     private boolean error = false;
-    private int valor = 666;
-    final Lock lock = new ReentrantLock();
+    private int valor=0;
+    private boolean introducirValor=false;
+    
     private int gradoAnterior = 0;
     private int grado = 0;
     private int puntero = 0;
@@ -76,6 +78,13 @@ public class PanelTuberias extends GridPane{
                 contador++;
             }
         }
+        //Reseteo valores
+        puntero = 0;
+        punteroAnterior = 0;
+        grado = 0;
+        gradoAnterior = 0;
+        error = false;
+        
     }
     
     public void girarGrifo(){
@@ -106,16 +115,10 @@ public class PanelTuberias extends GridPane{
         //Es necesario hacer ver el mensaje a través de otro thread ya que si no, el thread
         //principal no hace ver las tuberías pintadas hasta que se acepta el mensaje
         ThreadMensajes m = new ThreadMensajes(this,error);
-        
-        //Reseteo los valores para que al reiniciar el panel al jugar de nuevo no se mantengan
-        puntero = 0;
-        punteroAnterior = 0;
-        grado = 0;
-        gradoAnterior = 0;
-        error = false;
-        
-        //Inicializo el thread
         m.start();
+        
+        
+        
     }
     
     /**
@@ -254,14 +257,33 @@ public class PanelTuberias extends GridPane{
     public int getNumeroNivel(){
         this.numeroNivel = level.getNivel();
         return this.numeroNivel;
+    }   
+
+    public void esperarRespuestaMensaje(){
+        while(!introducirValor){
+        }
+        
+        if(error){
+            valor = JOptionPane.showConfirmDialog(null, "Desea jugar de nuevo?");
+        }else{
+            JOptionPane.showMessageDialog(null, "Siguiente nivel");
+        } 
+        
+        if(valor==JOptionPane.OK_OPTION){
+            //this.setNumeroNivel(1);
+            this.reiniciarTuberias();
+        }else if(valor==700){
+            //this.setNumeroNivel(this.getNumeroNivel()+1);
+            this.reiniciarTuberias();
+        }else{
+            System.exit(0);
+        
+        }
     }
     
     public void setValor(int valor){
         this.valor = valor;
-        System.out.println(this.valor);
+        introducirValor=true;
     }
-
-    public void reiniciar(){
-        this.reiniciarTuberias();
-    }   
+    
 }
