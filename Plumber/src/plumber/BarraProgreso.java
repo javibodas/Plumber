@@ -32,7 +32,6 @@ public class BarraProgreso extends ProgressBar implements Runnable {
          }
          this.setProgress(this.progreso);
          this.progreso = this.progreso + 0.05;
-         System.out.println(this.progreso);
         try {
             sleep(1);
         } catch (InterruptedException ex) {

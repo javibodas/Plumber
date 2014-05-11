@@ -51,9 +51,10 @@ public class Plumber extends Application {
         Tuberias tuberiaFinal = new Tuberias();
         PanelTuberias panelTuberias = new PanelTuberias(tuberias,grifo,tuberiaFinal);
         
+        Reiniciar reiniciar = new Reiniciar(panelTuberias);
         
         /* Crear fondo pasandole sus elementos como argumentos*/
-        Fondo fondo = new Fondo(panelTuberias,panelSuperior);
+        Fondo fondo = new Fondo(panelTuberias,panelSuperior,reiniciar);
         fondo.colocarElementos();
         
         

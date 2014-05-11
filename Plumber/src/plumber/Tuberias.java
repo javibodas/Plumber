@@ -28,7 +28,6 @@ public class Tuberias extends Button {
     private int[] posicion = new int[2];
     private PanelTuberias panel;
     public Tuberias(){
-        this.panel = panel;
         
        //Inicializar imagenes
        imagenes[0] = new Image("Tuberia90.png");
@@ -130,18 +129,5 @@ public class Tuberias extends Button {
     public void setPanelTuberias(PanelTuberias panel){
         this.panel = panel;
     }
-    public void colocarTuberias() {
-        /**
-        for(int i=0;i<tuberias.length;i++){
-            for(int j=0;j<tuberias[i].length;j++){
-                tuberias[i][j].insertarImagenTuberia();
-                tuberias[i][j].setPosicion(j, i+1);
-                this.add(tuberias[i][j],j,i+1);
-            }
-        }
- 
-        tuberiaFinal.insertarImagenFinal();
-        this.add(tuberiaFinal, tuberias[0].length-1, tuberias.length+1);
-        */
-    }
+    
 }

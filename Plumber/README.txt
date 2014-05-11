@@ -7,6 +7,7 @@ CLASES DE OBJETOS: PanelTuberias.java
 		   Grifo.java
 		   BarraProgreso.java
 		   Fondo.java
+		   Reiniciar.java
 ----------------------------------------
 CLASES AUXILIARES: ThreadMensajes.java
 ----------------------------------------
@@ -28,7 +29,7 @@ IMAGENES:          Grifo.png
 
 Existe la posibilidad de que se genere un panel que no se pueda resolver ya que la inserción de las tuberías
 la realizo de forma aleatoria ya que resulta mucho más sencillo y más rápido. En el caso de que se produzca
-este hecho valdría con realizar una solución no válida y reiniciar el juego.
+este hecho valdría con realizar una solución no válida y reiniciar el juego a través del boton situado a la derecha.
 
 La idea era realizar el juego con varios niveles, como el del formato web, pero para ello hubiera necesitado 
 realizar una aplicación con multiples threads para que el thread principal que pinta las tuberias no se quedase bloqueado

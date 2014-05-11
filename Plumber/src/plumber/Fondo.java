@@ -6,15 +6,10 @@
 
 package plumber;
 
-import java.awt.BorderLayout;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+
+
 
 
 /**
@@ -26,11 +21,13 @@ public class Fondo extends BorderPane{
     
     private PanelSuperior panelSuperior;
     private PanelTuberias panelTuberias;
+    private Reiniciar reiniciar;
     
-    public Fondo(PanelTuberias panelTuberias, PanelSuperior panelSuperior){
+    public Fondo(PanelTuberias panelTuberias, PanelSuperior panelSuperior,Reiniciar reiniciar){
         
         this.panelTuberias = panelTuberias;
         this.panelSuperior = panelSuperior;
+        this.reiniciar = reiniciar;
     }
     
     /**
@@ -44,8 +41,10 @@ public class Fondo extends BorderPane{
         panelTuberias.colocarTuberias();
         panelTuberias.colocarGrifo();
         panelSuperior.colocarElementos();
+        reiniciar.colocarReinicio();
         this.setCenter(panelTuberias);
         this.setTop(panelSuperior);
+        this.setRight(reiniciar);
     }
     
     public void setPaneTuberias(PanelTuberias panel){
@@ -62,6 +61,14 @@ public class Fondo extends BorderPane{
     
     public PanelSuperior getPanelSuperior(){
         return this.panelSuperior;
+    }
+    
+    public void setReiniciar(Reiniciar reinicio){
+        this.reiniciar = reinicio;
+    }
+    
+    public Reiniciar getReiniciar(){
+        return this.reiniciar;
     }
     
 }

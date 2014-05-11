@@ -30,20 +30,17 @@ public class ThreadMensajes extends Thread{
     
     @Override
    public void run() {
-        
         if(error){
             valor = JOptionPane.showConfirmDialog(null, "Desea jugar de nuevo?");
         }else{
             JOptionPane.showMessageDialog(null, "Siguiente nivel");
-        } 
-    }
-    
-    @Override
-    public void start(){
-        if(t==null){
-           t = new Thread(this);
-           t.start();
-           pane.setValor(valor);
         }
+        pane.setValor(valor);
+        
+        if(valor==JOptionPane.NO_OPTION || valor==JOptionPane.CANCEL_OPTION){
+           System.exit(0);
+        }
+        
+        
     }
 }

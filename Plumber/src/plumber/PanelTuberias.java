@@ -69,7 +69,7 @@ public class PanelTuberias extends GridPane {
         
     }
     
-    private void reiniciarTuberias(){
+    public void reiniciarTuberias(){
         int contador=0;
         for(int i=0;i<tuberias.length;i++){
             for(int j=0;j<tuberias[i].length;j++){
@@ -108,7 +108,6 @@ public class PanelTuberias extends GridPane {
             }else{
               pos = (grado + 3)+6;
             }
-            System.out.println(pos);
             tuberia.setGraphic(new ImageView(imagenes[pos]));
         }
       
@@ -128,7 +127,6 @@ public class PanelTuberias extends GridPane {
    
         //Si la posicion anterior es la misma tuberia error, a no ser que sean horizontales o verticales
         if(grado!=1 && grado!=2 && grado==gradoAnterior){
-            System.out.println("No deberia ser");
             error = true;
             return;
         }
