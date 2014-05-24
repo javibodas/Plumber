@@ -15,7 +15,7 @@ import javafx.scene.control.ProgressBar;
  *
  * @author javier
  */
-public class BarraProgreso extends ProgressBar implements Runnable {
+public class BarraProgreso extends ProgressBar {
     
     
     private double progreso;
@@ -24,20 +24,23 @@ public class BarraProgreso extends ProgressBar implements Runnable {
         this.progreso = progreso;
     }
     
-    @Override
-    public void run() {
-        count++;
-         if(count==20){
-             return;
-         }
-         this.setProgress(this.progreso);
-         this.progreso = this.progreso + 0.05;
-        try {
-            sleep(1);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(BarraProgreso.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         this.run();
+    public void setProgreso(double progreso){
+        this.progreso = progreso;
     }
-    
+    public void incrementarProgreso() throws InterruptedException{
+        
+        if(progreso<100){
+            this.setProgress(progreso/100);
+            try{
+                Thread.sleep(1000);
+            }catch(InterruptedException e){
+                Thread.currentThread().stop();
+            }
+            progreso = progreso + 2;
+            incrementarProgreso();
+        }
+        
+        ThreadMensajes thread = new ThreadMensajes(null,true);
+        thread.start();
+    }
 }

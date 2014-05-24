@@ -105,11 +105,7 @@ public class Tuberias extends Button {
             this.grado = 2;
         } 
     }
-    
-    public void insertarImagenFinal(){
-        this.setGraphic(new ImageView(imagenes[12]));
-    }   
-
+      
     public void setGrado(int grado) {
        this.grado = grado;
     }
@@ -125,9 +121,4 @@ public class Tuberias extends Button {
     public int[] getPosicion(){
         return this.posicion;
     }
-    
-    public void setPanelTuberias(PanelTuberias panel){
-        this.panel = panel;
-    }
-    
 }

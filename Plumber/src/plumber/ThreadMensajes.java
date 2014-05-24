@@ -9,6 +9,7 @@ package plumber;
 import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javax.swing.JOptionPane;
@@ -19,12 +20,12 @@ import javax.swing.JOptionPane;
  */
 public class ThreadMensajes extends Thread{
     
-    PanelTuberias pane;
+    LogicaJuego logica;
     private Thread t;
     private int valor = 666;
     private Boolean error;
-    public ThreadMensajes(PanelTuberias panel, boolean error){
-        this.pane = panel;
+    public ThreadMensajes(LogicaJuego logica, boolean error){
+        this.logica = logica;
         this.error = error;
     }
     
@@ -35,12 +36,18 @@ public class ThreadMensajes extends Thread{
         }else{
             JOptionPane.showMessageDialog(null, "Siguiente nivel");
         }
-        pane.setValor(valor);
+        //logica.setValor(valor);
         
         if(valor==JOptionPane.NO_OPTION || valor==JOptionPane.CANCEL_OPTION){
            System.exit(0);
         }
-        
-        
+        Task task = new Task<Void>() {
+            @Override
+            protected Void call() {
+                    logica.reiniciar();
+                
+                return null;
+            }};
+        new Thread(task).start();  
     }
 }

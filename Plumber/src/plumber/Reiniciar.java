@@ -20,24 +20,19 @@ import javafx.scene.image.ImageView;
 public class Reiniciar extends Button{
     
     
-    private PanelTuberias panel;
-    public Reiniciar(PanelTuberias panel){
+    private LogicaJuego logica;
+    public Reiniciar(LogicaJuego logica){
         
-        this.panel = panel;
+        this.logica = logica;
         this.setGraphic(new ImageView(new Image("Reinicio.png")));
         this.setOnAction(new EventHandler<ActionEvent>(){
 
             @Override
             public void handle(ActionEvent t) {
-            panel.reiniciarTuberias();
+            logica.reiniciar();
             }
             
             
         });
     }
-    
-    public void colocarReinicio(){
-        this.setPadding(new Insets(50,10,20,40));
-    }
-    
 }

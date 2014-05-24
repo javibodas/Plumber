@@ -12,18 +12,20 @@ import javafx.scene.control.Label;
  *
  * @author javier
  */
-public class Nivel extends Label{
+public class Movimientos extends Label {
     
-    private int nivel = 1;
-    public Nivel(String string){
-        super(string);
+    private int moves = 0;
+    public Movimientos(String moves){
+        super(moves);
     }
     
-    public int getNivel(){
-        return this.nivel;
+    public int getMovimientos(){
+        
+        return this.moves;
     }
-    public void setNivel(int nivel){
-        this.nivel = nivel;
+    
+    public void setMovimientos(int moves){
+        this.moves = moves;
     }
     
 }

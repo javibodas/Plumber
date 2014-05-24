@@ -27,39 +27,25 @@ public class Grifo extends Button{
     
     private PanelTuberias panelTuberias;
     private ImageView image;
+    private LogicaJuego logica;
     public Grifo(ImageView image){
         
     
         this.image = image;
+        this.setGraphic(image);
         this.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent t) {   
-                    panelTuberias.girarGrifo();
-                    //panelTuberias.esperarRespuestaMensaje();
-               
+                    logica.girarGrifo();
             }
         });
     }
-    
-    public PanelTuberias getPanelTuberia(){
-        return this.panelTuberias;
-        
-    }
     public void setPanelTuberia(PanelTuberias panelTuberias){
         
-        this.panelTuberias = panelTuberias;
-        
+        this.panelTuberias = panelTuberias;   
     }
     
-    public void colocarGrifo(){
-        this.colocarImagenGrifo();
-        panelTuberias.add(this, 0, 0);
+    public void setLogica(LogicaJuego logica){
+        this.logica = logica;
     }
-    
-    public void colocarImagenGrifo(){
-        this.setGraphic(image);
-        
-    }
-    
-    
 }

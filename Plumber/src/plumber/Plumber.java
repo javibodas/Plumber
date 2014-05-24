@@ -6,7 +6,10 @@
 
 package plumber;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -26,7 +29,7 @@ import javax.swing.JOptionPane;
  * @author javier
  */
 public class Plumber extends Application {
-    
+    Task copyWorker;
     
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
@@ -36,8 +39,19 @@ public class Plumber extends Application {
         Nivel level = new Nivel("LEVEL: 1");
         BarraProgreso time = new BarraProgreso(0.0);
         time.setMinSize(400, 40);
-        time.run();
         PanelSuperior panelSuperior = new PanelSuperior(moves,level,time);
+        
+        Task task = new Task<Void>() {
+            @Override
+            protected Void call() {
+                try {
+                    time.incrementarProgreso();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Plumber.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+            }};
+        new Thread(task).start();
         
         
         /* Inicizalizar elementos del panel central del fondo*/
@@ -48,10 +62,14 @@ public class Plumber extends Application {
             }
         }
         Grifo grifo = new Grifo(new ImageView(new Image("Grifo.png")));
-        Tuberias tuberiaFinal = new Tuberias();
-        PanelTuberias panelTuberias = new PanelTuberias(tuberias,grifo,tuberiaFinal);
+        Sumidero sumidero = new Sumidero();
+        PanelTuberias panelTuberias = new PanelTuberias(tuberias,grifo,sumidero);
         
-        Reiniciar reiniciar = new Reiniciar(panelTuberias);
+        
+        
+        LogicaJuego logica = new LogicaJuego(panelTuberias,tuberias,task,time);
+        grifo.setLogica(logica);
+        Reiniciar reiniciar = new Reiniciar(logica);
         
         /* Crear fondo pasandole sus elementos como argumentos*/
         Fondo fondo = new Fondo(panelTuberias,panelSuperior,reiniciar);

@@ -19,9 +19,9 @@ import javafx.scene.layout.BorderPane;
 public class Fondo extends BorderPane{
     
     
-    private PanelSuperior panelSuperior;
-    private PanelTuberias panelTuberias;
-    private Reiniciar reiniciar;
+    public PanelSuperior panelSuperior;
+    public PanelTuberias panelTuberias;
+    public Reiniciar reiniciar;
     
     public Fondo(PanelTuberias panelTuberias, PanelSuperior panelSuperior,Reiniciar reiniciar){
         
@@ -40,35 +40,10 @@ public class Fondo extends BorderPane{
         
         panelTuberias.colocarTuberias();
         panelTuberias.colocarGrifo();
+        panelTuberias.colocarSumidero();
         panelSuperior.colocarElementos();
-        reiniciar.colocarReinicio();
         this.setCenter(panelTuberias);
         this.setTop(panelSuperior);
         this.setRight(reiniciar);
     }
-    
-    public void setPaneTuberias(PanelTuberias panel){
-        this.panelTuberias = panel;
-    }
-    
-    public PanelTuberias getPanelTuberias(){
-        return this.panelTuberias;
-    }
-    
-    public void setPanelSuperior(PanelSuperior panel){
-        this.panelSuperior = panel;
-    }
-    
-    public PanelSuperior getPanelSuperior(){
-        return this.panelSuperior;
-    }
-    
-    public void setReiniciar(Reiniciar reinicio){
-        this.reiniciar = reinicio;
-    }
-    
-    public Reiniciar getReiniciar(){
-        return this.reiniciar;
-    }
-    
 }
